@@ -48,8 +48,8 @@ class ArbolExpresion {
                         nodos.push(construirSubArbol(nodos, operadores.pop()));
                     }
                     operadores.pop();
-                } else if ("+-*/^".indexOf(c) != -1) {
-                    while (!operadores.isEmpty() && prioridad(operadores.peek()) >= prioridad(c)) {
+                } else if ("+-*/^√".indexOf(c) != -1) {
+                    while (!operadores.isEmpty() && prioridad(operadores.peek()) >= prioridad(c) && c != '√') {
                         nodos.push(construirSubArbol(nodos, operadores.pop()));
                     }
                     operadores.push(c);
@@ -67,6 +67,7 @@ class ArbolExpresion {
 
         return nodos.pop();
     }
+
 
     private Nodo construirSubArbol(Stack<Nodo> nodos, char operador) {
         Nodo nodo = new Nodo(String.valueOf(operador));
@@ -110,6 +111,7 @@ class ArbolExpresion {
             case "*" -> izquierda * derecha;
             case "/" -> derecha != 0 ? izquierda / derecha : Double.NaN;
             case "^" -> Math.pow(izquierda, derecha);
+            case "√" -> Math.sqrt(derecha);
             default -> 0;
         };
     }
